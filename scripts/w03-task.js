@@ -60,14 +60,14 @@ document.querySelector('#divideNumbers').addEventListener('click', divideNumbers
 /* Decision Structure */
 
 function getTotal() {
-    let subtotal = Number(document.querySelector('#subtotal').value);
-    let member = document.querySelector('member');
-    if (member.checked === true) {
-        return document.querySelector('#total').value = (subtotal - (subtotal * 0.20)).toFixed(2);
+    let subtotal = parseFloat(document.getElementById('subtotal').value);
+    if (document.getElementById('member').checked) {
+        subtotal = subtotal - subtotal * 0.2;
     }
+    document.getElementById('total').textContent = subtotal.toFixed(2);
 }
 
-document.querySelector('#getTotal').addEventListener('click', getTotal);
+document.getElementById('getTotal').addEventListener('click', getTotal);
 
 
 /* ARRAY METHODS - Functional Programming */
