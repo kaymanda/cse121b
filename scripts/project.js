@@ -17,15 +17,15 @@ const getAnime = async () => {
 
 
 //Images display from api
-async function displayAnimeImage(containerId, animeList) {
-    const container = document.getElementById(containerId);
-    container.innerHTML = "";
+async function displayAnimeImage(pictureId, animeList) {
+    const picture = document.getElementById(pictureId);
+    picture.innerHTML = "";
 
     for (const anime of animeList) {
         const img = document.createElement("img");
         img.src = anime.image_url;
         img.alt = anime.title;
-        container.appendChild(img);
+        picture.appendChild(img);
     }
 }
 
@@ -37,13 +37,13 @@ function animeRated() {
 
 //Function to help sort most viewed use sort
 function animeViewed() {
-    const sortAnime = [...animeList].sort((a,b) => b.popularity - b.popularity);
+    const sortAnime = [...animeList].sort((a,b) => b.popularity - a.popularity);
     return sortAnime;
 }
 
 //Function to help filter mainstream use filter
 function mainstreamAnime() {
-    const animeMain = animeList.filter(anime => anime.is_mainstream === true);
+    const animeMain = animeList.sort(anime => anime.is_mainstream === true);
     return animeMain;
 }
 
@@ -51,7 +51,7 @@ function mainstreamAnime() {
 async function displayAnime() {
     const highestRatedAnime = animeRated()[0];
     const mostViewedAnime = animeViewed()[0];
-    const animeMainstream = mainstreamAnime();
+    const animeMainstream = mainstreamAnime()[0];
 
     document.getElementById("titleRatedAnime").innerText = highestRatedAnime.title;
     await displayAnimeImage("ratedImage", [highestRatedAnime]);
@@ -59,18 +59,11 @@ async function displayAnime() {
     document.getElementById("titleViewedAnime").innerText = mostViewedAnime.title;
     await displayAnimeImage("viewedImage", [mostViewedAnime]);
 
-    const titleMainstream = animeMainstream.map(anime => anime.title).join(", ");
-    document.getElementById("titleMainstream").innerText = titleMainstream;
-    await displayAnimeImage("titleMainstream", animeMainstream);
+    //const titleMainstream = animeMainstream.map(anime => anime.title).join(", ");
+    document.getElementById("titleMainstream").innerText = titleMainstream.title;
+    await displayAnimeImage("titleMainstream", [animeMainstream]);
 }
 
 // fetch data from displayAnime
 getAnime();
 
-//addEventListener for click button for mainstream anime
-document.getElementById("mainFilter").addEventListener("click", ()=> {
-    const titleMainstream = mainstreamAnime().map(anime => anime.title).join(", ");
-    document.getElementById("titleMainstream").innerText = titleMainstream;
-});
-
-//});
