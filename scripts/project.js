@@ -1,4 +1,5 @@
-//https://api.jikan.moe/v4/anime?q=top%20animes&sfw
+//https://api.jikan.moe/v4/anime?q=top%20animes&sfw: 
+//need to use jikan instead of animenewsnetwork they moved to xml and I am confused on moving xml to json
 
 //globel variable
 let animeList = [];
@@ -59,7 +60,7 @@ async function displayAnime() {
     document.getElementById("titleViewedAnime").innerText = mostViewedAnime.title;
     await displayAnimeImage("viewedImage", [mostViewedAnime]);
 
-    //const titleMainstream = animeMainstream.map(anime => anime.title).join(", ");
+    //const titleMainstream = animeMainstream.map(anime => anime.title).join(", "); //not working how I thought it would
     document.getElementById("titleMainstream").innerText = titleMainstream.title;
     await displayAnimeImage("titleMainstream", [animeMainstream]);
 }
